@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Neobis_Android_News_App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="breakingNews">Breaking news</string>
+    <string name="Search">Search</string>
+    <string name="savedNews">Saved news</string>
 </resources>
