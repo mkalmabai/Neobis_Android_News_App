@@ -2,7 +2,12 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-
+apply plugin: 'kotlin-kapt'
+kotlin {
+    kapt {
+        generateStubs = true
+    }
+}
 android {
     namespace 'com.example.neobis_android_news_app'
     compileSdk 34
@@ -35,9 +40,11 @@ android {
             enabled = true
         }
     }
+
 }
 
 dependencies {
+    def room_version = "2.6.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -54,6 +61,9 @@ dependencies {
 
 
     implementation 'com.sealwu.jsontokotlin:library:3.7.4'
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
    // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
@@ -62,7 +72,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
-
+    // Architectural Components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
 
 
 
