@@ -26,5 +26,9 @@
         android:id="@+id/detailFragment"
         android:name="com.example.neobis_android_news_app.fragments.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="article"
+            app:argType="com.example.neobis_android_news_app.model.Article" />
+    </fragment>
 </navigation>

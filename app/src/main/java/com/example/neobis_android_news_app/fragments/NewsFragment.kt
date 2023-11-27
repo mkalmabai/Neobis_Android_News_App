@@ -13,6 +13,7 @@ import com.example.neobis_android_news_app.MainActivity
 import com.example.neobis_android_news_app.R
 import com.example.neobis_android_news_app.adapter.RecyclerViewAdapter
 import com.example.neobis_android_news_app.databinding.FragmentNewsBinding
+import com.example.neobis_android_news_app.model.Article
 import com.example.neobis_android_news_app.util.Resource
 import com.example.neobis_android_news_app.viewModel.NewsViewModel
 
@@ -29,9 +30,15 @@ class NewsFragment : Fragment() {
     ): View? {
         binding = FragmentNewsBinding.inflate(inflater,container,false)
 
+
+        binding.update.setOnClickListener {
+            newsAdapter.differ.submitList(listOf())
+            viewModel.getBreakingNews("us")
+        }
         binding.favourite.setOnClickListener {
             findNavController().navigate(R.id.action_newsFragment_to_savedNewsFragment)
         }
+
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,5 +80,12 @@ class NewsFragment : Fragment() {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+        newsAdapter.setOnItemClickListener {
+            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(article = it)
+            findNavController().navigate(action)
+        }
     }
+
+
+
 }
