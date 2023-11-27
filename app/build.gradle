@@ -59,11 +59,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+// Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
 
     implementation 'com.sealwu.jsontokotlin:library:3.7.4'
     // Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:2.2.5"
 
    // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
@@ -74,7 +78,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
     // Architectural Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
-
-
+//glide
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    kapt 'com.github.bumptech.glide:compiler:4.16.0'
 
 }

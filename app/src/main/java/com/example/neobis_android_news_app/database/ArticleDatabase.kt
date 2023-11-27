@@ -9,27 +9,27 @@ import com.example.neobis_android_news_app.model.Article
 import com.example.neobis_android_news_app.util.Converters
 
 
-@Database(entities = [Article::class], version = 1, exportSchema = false)
+@Database(entities = [Article::class], version = 1)
+
 @TypeConverters(Converters::class)
-abstract class ArticleDatabase:RoomDatabase() {
-    abstract fun articleDao():ArticleDao
-    companion object{
+abstract class ArticleDatabase : RoomDatabase() {
+
+    abstract fun getArticleDao(): ArticleDao
+
+    companion object {
         @Volatile
-        private var INSTANCE: ArticleDatabase? = null
-        fun getDatabase(context: Context):ArticleDatabase{
-            val tempInstance = INSTANCE
-            if (tempInstance!= null){
-                return tempInstance
-            }
-            synchronized(ArticleDatabase::class){
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    ArticleDatabase::class.java,
-                    "articleDatabase"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
+        private var instance: ArticleDatabase? = null
+        private val LOCK = Any()
+
+        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
+            instance ?: createDatabase(context).also { instance = it }
         }
+
+        private fun createDatabase(context: Context) =
+            Room.databaseBuilder(
+                context.applicationContext,
+                ArticleDatabase::class.java,
+                "articles"
+            ).build()
     }
 }

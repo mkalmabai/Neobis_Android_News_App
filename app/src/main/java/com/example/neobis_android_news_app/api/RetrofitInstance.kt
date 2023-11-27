@@ -1,9 +1,10 @@
 package com.example.neobis_android_news_app.api
 
+
+import com.example.neobis_android_news_app.util.Constants.Companion.BASE_URl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import com.example.neobis_android_news_app.util.Constants.Companion.BASE_URl
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
@@ -19,9 +20,12 @@ class RetrofitInstance {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
+
         }
+
         val api by lazy{
             retrofit.create(ApiInterface::class.java)
         }
     }
+
 }

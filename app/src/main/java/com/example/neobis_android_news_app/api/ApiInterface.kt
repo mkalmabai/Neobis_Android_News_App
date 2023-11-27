@@ -8,12 +8,13 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
+
     @GET("v2/top-headlines")
     suspend fun getBreakingNews(
         @Query("country")
         countryCode: String = "us",
         @Query("page")
-        sizePage: Int = 10,
+        pageNumber: Int = 100,
         @Query("apiKey")
         apiKey: String = API_KEY
     ): Response<NewsResponse>
@@ -23,7 +24,7 @@ interface ApiInterface {
         @Query("q")
         searchQuery: String,
         @Query("page")
-        sizePage: Int = 10,
+        pageNumber: Int = 1,
         @Query("apiKey")
         apiKey: String = API_KEY
     ): Response<NewsResponse>
