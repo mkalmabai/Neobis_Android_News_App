@@ -21,7 +21,14 @@
         android:id="@+id/savedNewsFragment"
         android:name="com.example.neobis_android_news_app.fragments.SavedNewsFragment"
         android:label="fragment_saved_news"
-        tools:layout="@layout/fragment_saved_news" />
+        tools:layout="@layout/fragment_saved_news" >
+        <action
+            android:id="@+id/action_savedNewsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <argument
+            android:name="savedArticle "
+            app:argType="com.example.neobis_android_news_app.model.Article" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.neobis_android_news_app.fragments.DetailFragment"

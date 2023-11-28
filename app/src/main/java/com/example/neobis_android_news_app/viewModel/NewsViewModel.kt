@@ -1,6 +1,8 @@
 package com.example.neobis_android_news_app.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlin.collections.filter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.neobis_android_news_app.database.ArticleRepository
@@ -8,7 +10,9 @@ import com.example.neobis_android_news_app.model.Article
 import com.example.neobis_android_news_app.model.NewsResponse
 import com.example.neobis_android_news_app.util.Resource
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newCoroutineContext
 import retrofit2.Response
+import retrofit2.http.Query
 import java.util.Locale.IsoCountryCode
 
 class NewsViewModel(val articleRepository: ArticleRepository):ViewModel() {
@@ -33,5 +37,37 @@ class NewsViewModel(val articleRepository: ArticleRepository):ViewModel() {
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun saveArticle(article: Article) = viewModelScope.launch {
+        articleRepository.insert(article)
+    }
+
+    fun getSavedNews() = articleRepository.getSavedNews()
+
+    fun deleteArticle(article: Article) = viewModelScope.launch {
+        articleRepository.deleteArticle(article)
+
+    }
+    fun searchNews(searchQuery: String) = viewModelScope.launch {
+        breakingNews.postValue(Resource.Loading())
+        val response = articleRepository.searchNews(searchQuery)
+        breakingNews.postValue(handleBreakingNewsResponse(response))
+    }
+
+    val searchResults: MutableLiveData<List<Article>> = MutableLiveData()
+
+    fun savedsearchNews(searchQuery: String) = viewModelScope.launch {
+        val allNews = articleRepository.getSavedNews()
+        val filter = allNews.value?.filter { article ->
+            article.title.contains(searchQuery, ignoreCase = true) ||
+                    article.description.contains(searchQuery, ignoreCase = true)
+        } ?: emptyList()
+
+        // Assuming you have a LiveData variable for search results, set its value here
+        // Replace "searchResults" with the actual LiveData variable in your ViewModel
+        // Ensure you have declared and initialized the LiveData variable appropriately
+        searchResults.postValue(filter)
+
     }
 }

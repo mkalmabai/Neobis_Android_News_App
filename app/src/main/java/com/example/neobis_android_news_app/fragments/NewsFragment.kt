@@ -2,10 +2,12 @@ package com.example.neobis_android_news_app.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.InputQueue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,9 +15,9 @@ import com.example.neobis_android_news_app.MainActivity
 import com.example.neobis_android_news_app.R
 import com.example.neobis_android_news_app.adapter.RecyclerViewAdapter
 import com.example.neobis_android_news_app.databinding.FragmentNewsBinding
-import com.example.neobis_android_news_app.model.Article
 import com.example.neobis_android_news_app.util.Resource
 import com.example.neobis_android_news_app.viewModel.NewsViewModel
+import retrofit2.http.Query
 
 
 class NewsFragment : Fragment() {
@@ -23,6 +25,7 @@ class NewsFragment : Fragment() {
     private lateinit var binding: FragmentNewsBinding
      lateinit var viewModel: NewsViewModel
      lateinit var newsAdapter: RecyclerViewAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +49,7 @@ class NewsFragment : Fragment() {
         viewModel = (activity as MainActivity).viewModel
 
         setupRecyclerview()
-
+        search()
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success -> {
@@ -80,10 +83,27 @@ class NewsFragment : Fragment() {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
-        newsAdapter.setOnItemClickListener {
-            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(article = it)
-            findNavController().navigate(action)
+        newsAdapter.setOnItemClickListener { article ->
+            article?.let {
+                val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(article = it)
+                findNavController().navigate(action)
+            }
         }
+    }
+    private fun  search(){
+        binding.newsSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    viewModel.searchNews(it)
+                }
+                return true
+            }
+        })
+
     }
 
 

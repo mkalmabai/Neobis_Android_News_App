@@ -9,10 +9,10 @@ import com.example.neobis_android_news_app.model.Article
 interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(article: Article)
+    suspend fun insert(article: Article)
     @Query("SELECT * FROM articles")
     fun getAllArticles(): LiveData<List<Article>>
     @Delete
-    fun delete(article: Article)
+    suspend fun delete(article: Article)
 
 }
