@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.neobis_android_news_app.database.ArticleDao
 import com.example.neobis_android_news_app.database.ArticleDatabase
 import com.example.neobis_android_news_app.database.ArticleRepository
 import com.example.neobis_android_news_app.databinding.ActivityMainBinding

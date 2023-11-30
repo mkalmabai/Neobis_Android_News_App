@@ -26,7 +26,6 @@ class NewsFragment : Fragment() {
      lateinit var viewModel: NewsViewModel
      lateinit var newsAdapter: RecyclerViewAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,6 +83,7 @@ class NewsFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
         }
         newsAdapter.setOnItemClickListener { article ->
+            Log.d("NewsFragment", "Item clicked: $article")
             article?.let {
                 val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(article = it)
                 findNavController().navigate(action)

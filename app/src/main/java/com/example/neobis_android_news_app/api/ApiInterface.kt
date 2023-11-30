@@ -14,7 +14,7 @@ interface ApiInterface {
         @Query("country")
         countryCode: String = "us",
         @Query("page")
-        pageNumber: Int = 100,
+        pageNumber: Int = 1,
         @Query("apiKey")
         apiKey: String = API_KEY
     ): Response<NewsResponse>

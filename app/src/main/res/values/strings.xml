@@ -5,4 +5,6 @@
     <string name="breakingNews">Breaking news</string>
     <string name="Search">Search</string>
     <string name="savedNews">Saved news</string>
+    <string name="deleted">Deleted</string>
+    <string name="undo">undo</string>
 </resources>

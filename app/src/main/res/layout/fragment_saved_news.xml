@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="@+id/appBarText" />
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/newsSearch"
+            android:id="@+id/savedSearch"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"

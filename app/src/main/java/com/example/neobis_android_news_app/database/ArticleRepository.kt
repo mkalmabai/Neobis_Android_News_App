@@ -25,5 +25,4 @@ class ArticleRepository(
 
     suspend fun deleteArticle(article: Article) = db.getArticleDao().delete(article)
     suspend fun searchNews (query: String) = RetrofitInstance.api.searchForNews(query)
-
 }

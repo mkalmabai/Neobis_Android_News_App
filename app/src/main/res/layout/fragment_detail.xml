@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainColor"
-    tools:context=".fragments.SavedNewsFragment">
+    tools:context=".fragments.DetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/AppBar"
@@ -64,8 +64,7 @@
         app:backgroundTint="@color/white"
         android:src="@drawable/likeblue"
         app:tint ="@color/darkBlue"
-        android:clickable="true"
-        android:focusable="true"
+
         android:tint="@color/darkBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

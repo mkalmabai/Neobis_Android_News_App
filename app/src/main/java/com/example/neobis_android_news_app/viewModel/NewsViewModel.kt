@@ -55,19 +55,7 @@ class NewsViewModel(val articleRepository: ArticleRepository):ViewModel() {
         breakingNews.postValue(handleBreakingNewsResponse(response))
     }
 
-    val searchResults: MutableLiveData<List<Article>> = MutableLiveData()
 
-    fun savedsearchNews(searchQuery: String) = viewModelScope.launch {
-        val allNews = articleRepository.getSavedNews()
-        val filter = allNews.value?.filter { article ->
-            article.title.contains(searchQuery, ignoreCase = true) ||
-                    article.description.contains(searchQuery, ignoreCase = true)
-        } ?: emptyList()
-
-        // Assuming you have a LiveData variable for search results, set its value here
-        // Replace "searchResults" with the actual LiveData variable in your ViewModel
-        // Ensure you have declared and initialized the LiveData variable appropriately
-        searchResults.postValue(filter)
-
-    }
 }
+
+
